@@ -1,0 +1,8 @@
+br/com/fiap/dao/ConnectionFactory.class
+br/com/fiap/GreetingResource.class
+br/com/fiap/bo/UsuarioBO.class
+br/com/fiap/dao/UsuarioDAO.class
+br/com/fiap/utilidades/Validacoes.class
+br/com/fiap/resource/UsuarioResource.class
+br/com/fiap/resource/CorsFilter.class
+br/com/fiap/to/UsuarioTO.class
