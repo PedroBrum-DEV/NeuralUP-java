@@ -17,6 +17,7 @@
         <surefire-plugin.version>3.5.2</surefire-plugin.version>
     </properties>
 
+
     <dependencyManagement>
         <dependencies>
             <dependency>
@@ -26,6 +27,7 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
+
             <dependency>
                 <groupId>${quarkus.platform.group-id}</groupId>
                 <artifactId>quarkus-camel-bom</artifactId>
@@ -33,8 +35,19 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
+
+            <dependency>
+                <groupId>io.quarkus</groupId>
+                <artifactId>quarkus-smallrye-openapi</artifactId>
+            </dependency>
+
+            <dependency>
+                <groupId>io.quarkus</groupId>
+                <artifactId>quarkus-swagger-ui</artifactId>
+            </dependency>
         </dependencies>
     </dependencyManagement>
+
 
     <dependencies>
         <dependency>
