@@ -3,6 +3,7 @@ package br.com.fiap.resource;
 import br.com.fiap.bo.UsuarioBO;
 import br.com.fiap.dao.UsuarioDAO;
 import br.com.fiap.to.UsuarioTO;
+import br.com.fiap.to.LoginResponse;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
@@ -55,7 +56,7 @@ public class UsuarioResource {
 
         usuarioDAO.cadastrarUsuario(usuario);
         return Response.status(Response.Status.CREATED)
-                .entity("Usuário cadastrado com sucesso!")
+                .entity(usuario)
                 .build();
     }
 
@@ -91,12 +92,15 @@ public class UsuarioResource {
     public Response realizarLogin(UsuarioTO usuario) throws SQLException {
         UsuarioBO bo = new UsuarioBO();
         boolean autenticado = bo.realizarLogin(usuario.getEmail(), usuario.getSenha());
-        if (autenticado) {
-            return Response.ok("Login realizado com sucesso!").build();
-        } else {
+
+        if (!autenticado) {
             return Response.status(Response.Status.UNAUTHORIZED)
-                    .entity("E-mail ou senha inválidos.")
+                    .entity("{\"error\":\"E-mail ou senha inválidos.\"}")
                     .build();
         }
+
+        LoginResponse resp = new LoginResponse("fake-token-123", usuario.getNomeCompleto());
+
+        return Response.ok(resp).build();
     }
 }
