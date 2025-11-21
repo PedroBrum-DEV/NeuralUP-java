@@ -12,6 +12,8 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
+
+
 @Path("/usuario")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
