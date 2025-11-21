@@ -17,20 +17,11 @@ import java.util.Map;
 @Consumes(MediaType.APPLICATION_JSON)
 public class UsuarioResource {
 
-    private UsuarioDAO usuarioDAO;
-
-    public UsuarioResource() throws SQLException, ClassNotFoundException {
-        this.usuarioDAO = new UsuarioDAO();
-    }
+    private final UsuarioDAO usuarioDAO = new UsuarioDAO();
 
     @GET
     public Response listarUsuarios() throws SQLException {
         List<UsuarioTO> usuarios = usuarioDAO.listarUsuarios();
-        if (usuarios.isEmpty()) {
-            return Response.status(Response.Status.NOT_FOUND)
-                    .entity(Map.of("error", "Nenhum usuário encontrado"))
-                    .build();
-        }
         return Response.ok(usuarios).build();
     }
 
@@ -39,9 +30,7 @@ public class UsuarioResource {
     public Response buscarPorEmail(@PathParam("email") String email) throws SQLException {
         UsuarioTO usuario = usuarioDAO.buscarPorEmail(email);
         if (usuario == null) {
-            return Response.status(Response.Status.NOT_FOUND)
-                    .entity(Map.of("error", "Usuário não encontrado"))
-                    .build();
+            return Response.status(404).entity(Map.of("error", "Usuário não encontrado")).build();
         }
         return Response.ok(usuario).build();
     }
@@ -49,19 +38,8 @@ public class UsuarioResource {
     @POST
     @Path("/cadastrar")
     public Response cadastrarUsuario(UsuarioTO usuario) throws SQLException {
-        UsuarioBO bo = new UsuarioBO();
-
-        if (!bo.validarCampos(usuario)) {
-            return Response.status(Response.Status.BAD_REQUEST)
-                    .entity(Map.of("error", "Campos inválidos. Verifique nome, e-mail, senha e data de nascimento."))
-                    .build();
-        }
-
         usuarioDAO.cadastrarUsuario(usuario);
-
-        return Response.status(Response.Status.CREATED)
-                .entity(usuario)
-                .build();
+        return Response.status(201).entity(usuario).build();
     }
 
     @PUT
@@ -69,41 +47,46 @@ public class UsuarioResource {
     public Response atualizarUsuario(@PathParam("email") String email, UsuarioTO usuario) throws SQLException {
         usuario.setEmail(email);
         boolean atualizado = usuarioDAO.atualizarUsuario(usuario);
-        if (atualizado) {
-            return Response.ok(Map.of("message", "Usuário atualizado!")).build();
-        } else {
-            return Response.status(Response.Status.NOT_FOUND)
-                    .entity(Map.of("error", "Usuário não encontrado"))
-                    .build();
+
+        if (!atualizado) {
+            return Response.status(404).entity(Map.of("error", "Usuário não encontrado")).build();
         }
+
+        return Response.ok(Map.of("message", "Usuário atualizado!")).build();
     }
 
     @DELETE
     @Path("/{email}")
     public Response deletarUsuario(@PathParam("email") String email) throws SQLException {
         boolean deletado = usuarioDAO.deletarUsuario(email);
-        if (deletado) {
-            return Response.ok(Map.of("message", "Usuário removido!")).build();
-        } else {
-            return Response.status(Response.Status.NOT_FOUND)
-                    .entity(Map.of("error", "Usuário não encontrado"))
-                    .build();
+        if (!deletado) {
+            return Response.status(404).entity(Map.of("error", "Usuário não encontrado")).build();
         }
+        return Response.ok(Map.of("message", "Usuário removido!")).build();
+    }
+
+    // ------------------------------
+    // LOGIN CORRIGIDO
+    // ------------------------------
+
+    public static class LoginRequest {
+        public String email;
+        public String senha;
     }
 
     @POST
     @Path("/login")
-    public Response realizarLogin(UsuarioTO usuario) throws SQLException {
+    public Response realizarLogin(LoginRequest req) throws SQLException {
         UsuarioBO bo = new UsuarioBO();
-        boolean autenticado = bo.realizarLogin(usuario.getEmail(), usuario.getSenha());
+        boolean autenticado = bo.realizarLogin(req.email, req.senha);
 
         if (!autenticado) {
-            return Response.status(Response.Status.UNAUTHORIZED)
+            return Response.status(401)
                     .entity(Map.of("error", "E-mail ou senha inválidos"))
                     .build();
         }
 
-        UsuarioTO usuarioBanco = usuarioDAO.buscarPorEmail(usuario.getEmail());
+        UsuarioTO usuarioBanco = usuarioDAO.buscarPorEmail(req.email);
 
         LoginResponse resp = new LoginResponse(
                 "fake-token-123",
