@@ -10,6 +10,7 @@ import jakarta.ws.rs.core.Response;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 
 @Path("/usuario")
 @Produces(MediaType.APPLICATION_JSON)
@@ -27,7 +28,7 @@ public class UsuarioResource {
         List<UsuarioTO> usuarios = usuarioDAO.listarUsuarios();
         if (usuarios.isEmpty()) {
             return Response.status(Response.Status.NOT_FOUND)
-                    .entity("Nenhum usuário encontrado.")
+                    .entity(Map.of("error", "Nenhum usuário encontrado"))
                     .build();
         }
         return Response.ok(usuarios).build();
@@ -39,22 +40,25 @@ public class UsuarioResource {
         UsuarioTO usuario = usuarioDAO.buscarPorEmail(email);
         if (usuario == null) {
             return Response.status(Response.Status.NOT_FOUND)
-                    .entity("Usuário com e-mail " + email + " não encontrado.")
+                    .entity(Map.of("error", "Usuário não encontrado"))
                     .build();
         }
         return Response.ok(usuario).build();
     }
 
     @POST
+    @Path("/cadastrar")
     public Response cadastrarUsuario(UsuarioTO usuario) throws SQLException {
         UsuarioBO bo = new UsuarioBO();
+
         if (!bo.validarCampos(usuario)) {
             return Response.status(Response.Status.BAD_REQUEST)
-                    .entity("Campos inválidos. Verifique nome, e-mail, senha e data de nascimento.")
+                    .entity(Map.of("error", "Campos inválidos. Verifique nome, e-mail, senha e data de nascimento."))
                     .build();
         }
 
         usuarioDAO.cadastrarUsuario(usuario);
+
         return Response.status(Response.Status.CREATED)
                 .entity(usuario)
                 .build();
@@ -66,10 +70,10 @@ public class UsuarioResource {
         usuario.setEmail(email);
         boolean atualizado = usuarioDAO.atualizarUsuario(usuario);
         if (atualizado) {
-            return Response.ok("Usuário atualizado com sucesso!").build();
+            return Response.ok(Map.of("message", "Usuário atualizado!")).build();
         } else {
             return Response.status(Response.Status.NOT_FOUND)
-                    .entity("Usuário com e-mail " + email + " não encontrado.")
+                    .entity(Map.of("error", "Usuário não encontrado"))
                     .build();
         }
     }
@@ -79,10 +83,10 @@ public class UsuarioResource {
     public Response deletarUsuario(@PathParam("email") String email) throws SQLException {
         boolean deletado = usuarioDAO.deletarUsuario(email);
         if (deletado) {
-            return Response.ok("Usuário removido com sucesso!").build();
+            return Response.ok(Map.of("message", "Usuário removido!")).build();
         } else {
             return Response.status(Response.Status.NOT_FOUND)
-                    .entity("Usuário com e-mail " + email + " não encontrado.")
+                    .entity(Map.of("error", "Usuário não encontrado"))
                     .build();
         }
     }
@@ -95,11 +99,16 @@ public class UsuarioResource {
 
         if (!autenticado) {
             return Response.status(Response.Status.UNAUTHORIZED)
-                    .entity("{\"error\":\"E-mail ou senha inválidos.\"}")
+                    .entity(Map.of("error", "E-mail ou senha inválidos"))
                     .build();
         }
 
-        LoginResponse resp = new LoginResponse("fake-token-123", usuario.getNomeCompleto());
+        UsuarioTO usuarioBanco = usuarioDAO.buscarPorEmail(usuario.getEmail());
+
+        LoginResponse resp = new LoginResponse(
+                "fake-token-123",
+                usuarioBanco.getNome()
+        );
 
         return Response.ok(resp).build();
     }

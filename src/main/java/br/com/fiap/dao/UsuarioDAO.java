@@ -13,9 +13,9 @@ public class UsuarioDAO {
 
     // CREATE
     public void cadastrarUsuario(UsuarioTO usuario) throws SQLException {
-        String sql = "INSERT INTO usuario (nome_completo, email, senha, data_nascimento) VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO usuario (nome, email, senha, data_nascimento) VALUES (?, ?, ?, ?)";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setString(1, usuario.getNomeCompleto());
+            stmt.setString(1, usuario.getNome());
             stmt.setString(2, usuario.getEmail());
             stmt.setString(3, usuario.getSenha());
             stmt.setDate(4, Date.valueOf(usuario.getDataNascimento()));
@@ -26,12 +26,12 @@ public class UsuarioDAO {
     // READ - listar todos
     public List<UsuarioTO> listarUsuarios() throws SQLException {
         List<UsuarioTO> lista = new ArrayList<>();
-        String sql = "SELECT nome_completo, email, senha, data_nascimento FROM usuario";
+        String sql = "SELECT nome, email, senha, data_nascimento FROM usuario";
         try (Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(sql)) {
             while (rs.next()) {
                 lista.add(new UsuarioTO(
-                        rs.getString("nome_completo"),
+                        rs.getString("nome"),
                         rs.getString("email"),
                         rs.getString("senha"),
                         rs.getDate("data_nascimento").toLocalDate()
@@ -43,13 +43,13 @@ public class UsuarioDAO {
 
     // READ - buscar por e-mail
     public UsuarioTO buscarPorEmail(String email) throws SQLException {
-        String sql = "SELECT nome_completo, email, senha, data_nascimento FROM usuario WHERE email = ?";
+        String sql = "SELECT nome, email, senha, data_nascimento FROM usuario WHERE email = ?";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, email);
             try (ResultSet rs = stmt.executeQuery()) {
                 if (rs.next()) {
                     return new UsuarioTO(
-                            rs.getString("nome_completo"),
+                            rs.getString("nome"),
                             rs.getString("email"),
                             rs.getString("senha"),
                             rs.getDate("data_nascimento").toLocalDate()
@@ -62,9 +62,9 @@ public class UsuarioDAO {
 
     // UPDATE
     public boolean atualizarUsuario(UsuarioTO usuario) throws SQLException {
-        String sql = "UPDATE usuario SET nome_completo = ?, senha = ?, data_nascimento = ? WHERE email = ?";
+        String sql = "UPDATE usuario SET nome = ?, senha = ?, data_nascimento = ? WHERE email = ?";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
-            stmt.setString(1, usuario.getNomeCompleto());
+            stmt.setString(1, usuario.getNome());
             stmt.setString(2, usuario.getSenha());
             stmt.setDate(3, Date.valueOf(usuario.getDataNascimento()));
             stmt.setString(4, usuario.getEmail());
