@@ -40,9 +40,26 @@ public class UsuarioResource {
     @POST
     @Path("/cadastrar")
     public Response cadastrarUsuario(UsuarioTO usuario) throws SQLException {
+        UsuarioBO bo = new UsuarioBO();
+
+        if (!bo.validarCampos(usuario)) {
+            return Response.status(400)
+                    .entity(Map.of("error", "Dados inválidos"))
+                    .build();
+        }
+
         usuarioDAO.cadastrarUsuario(usuario);
-        return Response.status(201).entity(usuario).build();
+
+        LoginResponse resp = new LoginResponse(
+                "fake-token-123", // gere um real futuramente
+                usuario.getNome()
+        );
+
+        return Response.status(201)
+                .entity(resp)
+                .build();
     }
+
 
     @PUT
     @Path("/{email}")
