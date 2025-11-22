@@ -11,7 +11,7 @@ public class UsuarioBO {
     // Valida campos obrigatórios
     public boolean validarCampos(UsuarioTO usuario) {
         return usuario != null &&
-                usuario.getNome() != null && !usuario.getNome().isBlank() &&
+                usuario.getNomeCompleto() != null && !usuario.getNomeCompleto().isBlank() &&
                 usuario.getEmail() != null && usuario.getEmail().contains("@") &&
                 usuario.getSenha() != null && usuario.getSenha().length() >= 6 &&
                 usuario.getDataNascimento() != null &&

@@ -11,13 +11,12 @@ public class UsuarioDAO {
 
     // CREATE
     public void cadastrarUsuario(UsuarioTO usuario) throws SQLException {
-        String sql = "INSERT INTO usuario (NOME_COMPLETO, email, senha, data_nascimento) VALUES (?, ?, ?, ?)";
-
+        String sql = "INSERT INTO usuario (NOME_COMPLETO, EMAIL, SENHA, DATA_NASCIMENTO) VALUES (?, ?, ?, ?)";
 
         try (Connection conn = ConnectionFactory.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-            stmt.setString(1, usuario.getNome());
+            stmt.setString(1, usuario.getNomeCompleto());
             stmt.setString(2, usuario.getEmail());
             stmt.setString(3, usuario.getSenha());
             stmt.setDate(4, Date.valueOf(usuario.getDataNascimento()));
@@ -29,7 +28,7 @@ public class UsuarioDAO {
     // READ - listar todos
     public List<UsuarioTO> listarUsuarios() throws SQLException {
         List<UsuarioTO> lista = new ArrayList<>();
-        String sql = "SELECT nome, email, senha, data_nascimento FROM usuario";
+        String sql = "SELECT NOME_COMPLETO, EMAIL, SENHA, DATA_NASCIMENTO FROM USUARIO";
 
         try (Connection conn = ConnectionFactory.getConnection();
              Statement stmt = conn.createStatement();
@@ -37,10 +36,10 @@ public class UsuarioDAO {
 
             while (rs.next()) {
                 lista.add(new UsuarioTO(
-                        rs.getString("nome"),
-                        rs.getString("email"),
-                        rs.getString("senha"),
-                        rs.getDate("data_nascimento").toLocalDate()
+                        rs.getString("NOME_COMPLETO"),
+                        rs.getString("EMAIL"),
+                        rs.getString("SENHA"),
+                        rs.getDate("DATA_NASCIMENTO").toLocalDate()
                 ));
             }
         }
@@ -50,7 +49,7 @@ public class UsuarioDAO {
 
     // READ - buscar por e-mail
     public UsuarioTO buscarPorEmail(String email) throws SQLException {
-        String sql = "SELECT nome, email, senha, data_nascimento FROM usuario WHERE email = ?";
+        String sql = "SELECT NOME_COMPLETO, EMAIL, SENHA, DATA_NASCIMENTO FROM USUARIO WHERE EMAIL = ?";
 
         try (Connection conn = ConnectionFactory.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -60,10 +59,10 @@ public class UsuarioDAO {
             try (ResultSet rs = stmt.executeQuery()) {
                 if (rs.next()) {
                     return new UsuarioTO(
-                            rs.getString("nome"),
-                            rs.getString("email"),
-                            rs.getString("senha"),
-                            rs.getDate("data_nascimento").toLocalDate()
+                            rs.getString("NOME_COMPLETO"),
+                            rs.getString("EMAIL"),
+                            rs.getString("SENHA"),
+                            rs.getDate("DATA_NASCIMENTO").toLocalDate()
                     );
                 }
             }
@@ -74,12 +73,12 @@ public class UsuarioDAO {
 
     // UPDATE
     public boolean atualizarUsuario(UsuarioTO usuario) throws SQLException {
-        String sql = "UPDATE usuario SET nome = ?, senha = ?, data_nascimento = ? WHERE email = ?";
+        String sql = "UPDATE USUARIO SET NOME_COMPLETO = ?, SENHA = ?, DATA_NASCIMENTO = ? WHERE EMAIL = ?";
 
         try (Connection conn = ConnectionFactory.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-            stmt.setString(1, usuario.getNome());
+            stmt.setString(1, usuario.getNomeCompleto());
             stmt.setString(2, usuario.getSenha());
             stmt.setDate(3, Date.valueOf(usuario.getDataNascimento()));
             stmt.setString(4, usuario.getEmail());
@@ -90,7 +89,7 @@ public class UsuarioDAO {
 
     // DELETE
     public boolean deletarUsuario(String email) throws SQLException {
-        String sql = "DELETE FROM usuario WHERE email = ?";
+        String sql = "DELETE FROM USUARIO WHERE EMAIL = ?";
 
         try (Connection conn = ConnectionFactory.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {

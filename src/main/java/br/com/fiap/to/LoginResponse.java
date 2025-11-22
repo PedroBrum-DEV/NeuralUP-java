@@ -2,20 +2,20 @@ package br.com.fiap.to;
 
 public class LoginResponse {
     private String token;
-    private String nome;
+    private String nomeCompleto;
 
     public LoginResponse() {}
 
-    public LoginResponse(String token, String nome) {
+    public LoginResponse(String token, String nomeCompleto) {
         this.token = token;
-        this.nome = nome;
+        this.nomeCompleto = nomeCompleto;
     }
 
     public String getToken() {
         return token;
     }
 
-    public String getNome() {
-        return nome;
+    public String getNomeCompleto() {
+        return nomeCompleto;
     }
 }

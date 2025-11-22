@@ -1,4 +1,4 @@
-# megafarma
+# NeuralUp - Global Solution II/2025
 
 Este projeto é um sistema acadêmico desenvolvido para a disciplina de *JAVA* na FIAP. O objetivo é aplicar conceitos de desenvolvimento backend utilizando o framework Quarkus, explorando práticas modernas de APIs REST, persistência e empacotamento de aplicações Java.
 

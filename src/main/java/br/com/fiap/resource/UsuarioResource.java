@@ -52,7 +52,7 @@ public class UsuarioResource {
 
         LoginResponse resp = new LoginResponse(
                 "fake-token-123", // gere um real futuramente
-                usuario.getNome()
+                usuario.getNomeCompleto()
         );
 
         return Response.status(201)
@@ -109,7 +109,7 @@ public class UsuarioResource {
 
         LoginResponse resp = new LoginResponse(
                 "fake-token-123",
-                usuarioBanco.getNome()
+                usuarioBanco.getNomeCompleto()
         );
 
         return Response.ok(resp).build();

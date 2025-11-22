@@ -3,27 +3,27 @@ package br.com.fiap.to;
 import java.time.LocalDate;
 
 public class UsuarioTO {
-    private String nome;
+
+    private String nomeCompleto;
     private String email;
     private String senha;
     private LocalDate dataNascimento;
 
     public UsuarioTO() {}
 
-    public UsuarioTO(String nome, String email, String senha, LocalDate dataNascimento) {
-        this.nome = nome;
+    public UsuarioTO(String nomeCompleto, String email, String senha, LocalDate dataNascimento) {
+        this.nomeCompleto = nomeCompleto;
         this.email = email;
         this.senha = senha;
         this.dataNascimento = dataNascimento;
     }
 
-    // Getters e Setters
-    public String getNome() {
-        return nome;
+    public String getNomeCompleto() {
+        return nomeCompleto;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setNomeCompleto(String nomeCompleto) {
+        this.nomeCompleto = nomeCompleto;
     }
 
     public String getEmail() {
@@ -48,12 +48,5 @@ public class UsuarioTO {
 
     public void setDataNascimento(LocalDate dataNascimento) {
         this.dataNascimento = dataNascimento;
-    }
-
-    @Override
-    public String toString() {
-        return "Usuário: " + nome +
-                " | E-mail: " + email +
-                " | Data de nascimento: " + dataNascimento;
     }
 }
