@@ -60,7 +60,6 @@ public class UsuarioResource {
                 .build();
     }
 
-
     @PUT
     @Path("/{email}")
     public Response atualizarUsuario(@PathParam("email") String email, UsuarioTO usuario) throws SQLException {
