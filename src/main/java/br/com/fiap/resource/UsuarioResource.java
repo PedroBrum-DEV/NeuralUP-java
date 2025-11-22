@@ -51,7 +51,7 @@ public class UsuarioResource {
         usuarioDAO.cadastrarUsuario(usuario);
 
         LoginResponse resp = new LoginResponse(
-                "fake-token-123", // gere um real futuramente
+                "fake-token-123",
                 usuario.getNomeCompleto()
         );
 
