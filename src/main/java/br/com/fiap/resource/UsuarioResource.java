@@ -84,10 +84,6 @@ public class UsuarioResource {
         return Response.ok(Map.of("message", "Usuário removido!")).build();
     }
 
-    // ------------------------------
-    // LOGIN CORRIGIDO
-    // ------------------------------
-
     public static class LoginRequest {
         public String email;
         public String senha;

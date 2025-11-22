@@ -6,26 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="7c4c0710-f90c-48c1-93cd-7838ad12457a" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/fiap/bo/UsuarioBO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/fiap/bo/UsuarioBO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/fiap/dao/UsuarioDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/fiap/dao/UsuarioDAO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/br/com/fiap/resource/UsuarioResource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/fiap/resource/UsuarioResource.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/fiap/to/LoginResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/fiap/to/LoginResponse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/fiap/to/UsuarioTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/fiap/to/UsuarioTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/br/com/fiap/bo/UsuarioBO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/br/com/fiap/bo/UsuarioBO.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/br/com/fiap/dao/UsuarioDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/br/com/fiap/dao/UsuarioDAO.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/br/com/fiap/resource/UsuarioResource.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/br/com/fiap/resource/UsuarioResource.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/br/com/fiap/to/LoginResponse.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/br/com/fiap/to/LoginResponse.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/br/com/fiap/to/UsuarioTO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/br/com/fiap/to/UsuarioTO.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/quarkus-app/app/quarkus-run-1.0.0-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/target/quarkus-app/app/quarkus-run-1.0.0-SNAPSHOT.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/quarkus-app/quarkus-app-dependencies.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/quarkus-app/quarkus-run.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/quarkus-app/quarkus/generated-bytecode.jar" beforeDir="false" afterPath="$PROJECT_DIR$/target/quarkus-app/quarkus/generated-bytecode.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/quarkus-app/quarkus/quarkus-application.dat" beforeDir="false" afterPath="$PROJECT_DIR$/target/quarkus-app/quarkus/quarkus-application.dat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/quarkus-app/quarkus/transformed-bytecode.jar" beforeDir="false" afterPath="$PROJECT_DIR$/target/quarkus-app/quarkus/transformed-bytecode.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/quarkus-artifact.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/quarkus-run-1.0.0-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/target/quarkus-run-1.0.0-SNAPSHOT.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/quarkus/bootstrap/test-app-model.dat" beforeDir="false" afterPath="$PROJECT_DIR$/target/quarkus/bootstrap/test-app-model.dat" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -211,7 +192,8 @@
       <workItem from="1763434157426" duration="1920000" />
       <workItem from="1763436446997" duration="7737000" />
       <workItem from="1763650780902" duration="5609000" />
-      <workItem from="1763763019426" duration="14671000" />
+      <workItem from="1763763019426" duration="15381000" />
+      <workItem from="1763782245039" duration="298000" />
     </task>
     <servers />
   </component>
