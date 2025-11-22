@@ -11,7 +11,8 @@ public class UsuarioDAO {
 
     // CREATE
     public void cadastrarUsuario(UsuarioTO usuario) throws SQLException {
-        String sql = "INSERT INTO usuario (nome, email, senha, data_nascimento) VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO usuario (NOME_COMPLETO, email, senha, data_nascimento) VALUES (?, ?, ?, ?)";
+
 
         try (Connection conn = ConnectionFactory.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
